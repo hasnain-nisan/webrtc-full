@@ -8,7 +8,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'http://192.168.68.122:5173',
+        origin: 'http://localhost:5173',
         methods: ['GET', 'POST'],
     },
 });
@@ -21,6 +21,19 @@ io.on('connection', (socket) => {
         console.log(`Message received: ${data} ${socket.id}`);
         io.emit('message', data);
     });
+
+    socket.on('offer', (offer) => {
+        socket.broadcast.emit('offer', offer);
+    });
+
+    socket.on('answer', (answer) => {
+        socket.broadcast.emit('answer', answer);
+    });
+
+    socket.on('candidate', (candidate) => {
+        socket.broadcast.emit('candidate', candidate);
+    });
+
 
     socket.on('disconnect', () => {
         console.log(`User disconnected: ${socket.id}`);

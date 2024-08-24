@@ -19,6 +19,8 @@ const VideoChat: React.FC = () => {
     };
 
     useEffect(() => {
+        console.log(navigator);
+        
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then(stream => {
                 setLocalStream(stream);
@@ -27,7 +29,18 @@ const VideoChat: React.FC = () => {
                 }
                 socket.emit('ready');
             })
-            .catch(error => console.error('Error accessing media devices.', error));
+            .catch(error => {
+            if (error.name === 'NotAllowedError') {
+                alert('Permission to access camera and microphone was denied.');
+            } else if (error.name === 'NotFoundError') {
+                alert('No camera/microphone found.');
+            } else if (error.name === 'NotReadableError') {
+                alert('The device is already in use by another application.');
+            } else {
+                console.error('Error accessing media devices:', error);
+            }
+        });
+
 
         socket.on('offer', handleOffer);
         socket.on('answer', handleAnswer);
