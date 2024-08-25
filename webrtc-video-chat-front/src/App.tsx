@@ -8,7 +8,7 @@ import VideoChat from './VideoChat'
 function App() {
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 font-poppins">
       <Sidebar/>
       <div className='w-full flex flex-col'>
         <Header/>
