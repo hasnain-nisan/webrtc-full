@@ -18,7 +18,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon, isActive = false }) => 
 
 const Sidebar: React.FC = () => {
     return (
-        <div className="hidden w-16 bg-gray-900 text-white lg:flex flex-col items-center justify-center py-4 space-y-6">
+        <div className="hidden lg:flex w-16 bg-gray-900 text-white flex-col items-center justify-center py-4 space-y-6">
             <SidebarItem icon={<FaTachometerAlt fontSize={25}/>} />
             <SidebarItem icon={<IoChatbubbleSharp fontSize={25}/>} isActive={true} />
             <SidebarItem icon={<IoChatbubbles fontSize={25}/>} />
